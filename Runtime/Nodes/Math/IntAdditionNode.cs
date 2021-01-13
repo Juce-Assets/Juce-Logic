@@ -3,7 +3,7 @@ using Juce.Scripting.Instructions;
 
 namespace Juce.Logic.Nodes
 {
-    public class IntAdditionNode : FlowNode
+    public class IntAdditionNode : InstructionNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Strict)]
         public int ValueAIn;
@@ -25,6 +25,5 @@ namespace Juce.Logic.Nodes
         {
             return script.CreateScriptInstruction<IntAdditionInstruction>();
         }
-
     }
 }

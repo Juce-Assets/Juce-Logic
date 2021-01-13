@@ -10,6 +10,7 @@ namespace Juce.Logic
         private readonly Dictionary<NodePort, LogicPort> inputScriptLinks = new Dictionary<NodePort, LogicPort>();
         private readonly Dictionary<NodePort, LogicPort> outputScriptLinks = new Dictionary<NodePort, LogicPort>();
 
+        public LogicGraph LogicGraph => graph as LogicGraph;
         public ScriptInstruction CompiledScriptInstruction { get; private set; }
 
         public List<NodePort> InputScriptLinks => inputScriptLinks.Keys.ToList();
@@ -51,5 +52,7 @@ namespace Juce.Logic
 
         protected abstract void LinkScriptPorts();
         protected abstract ScriptInstruction GenerateInstruction(Script script);
+
+        public virtual void OnCompile(Script script) { }
     }
 }

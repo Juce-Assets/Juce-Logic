@@ -3,23 +3,23 @@ using Juce.Scripting.Instructions;
 
 namespace Juce.Logic.Nodes
 {
-    public class IntToStringNode : FlowNode
+    public class FloatToIntNode : InstructionNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Strict)]
-        public int ValueIn;
+        public float ValueIn;
 
         [Output(connectionType = ConnectionType.Multiple, typeConstraint = TypeConstraint.Strict)]
-        public string ValueOut;
+        public int ValueOut;
 
         protected override void LinkScriptPorts()
         {
-            LinkInputPortWithLogicPort(nameof(ValueIn), nameof(IntToStringInstruction.ValueIn), ValueIn);
-            LinkOutputPortWithLogicPort(nameof(ValueOut), nameof(IntToStringInstruction.ValueOut));
+            LinkInputPortWithLogicPort(nameof(ValueIn), nameof(FloatToIntInstruction.ValueIn), ValueIn);
+            LinkOutputPortWithLogicPort(nameof(ValueOut), nameof(FloatToIntInstruction.ValueOut));
         }
 
         protected override ScriptInstruction GenerateInstruction(Script script)
         {
-            return script.CreateScriptInstruction<IntToStringInstruction>();
+            return script.CreateScriptInstruction<FloatToIntInstruction>();
         }
 
     }
