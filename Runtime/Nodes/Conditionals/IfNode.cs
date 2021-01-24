@@ -1,9 +1,9 @@
-﻿using Juce.Logic.Compiler;
+﻿using Juce.OldLogic.Compiler;
 using Juce.Scripting;
 using Juce.Scripting.Instructions;
 using XNode;
 
-namespace Juce.Logic.Nodes
+namespace Juce.OldLogic.Nodes
 {
     public class IfNode : FlowNode
     {

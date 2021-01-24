@@ -1,9 +1,9 @@
 ﻿using Juce.Scripting;
 using Juce.Scripting.Instructions;
 
-namespace Juce.Logic.Nodes
+namespace Juce.OldLogic.Nodes
 {
-    public class FloatToIntNode : InstructionNode
+    public class FloatToIntNode : LogicNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Strict)]
         public float ValueIn;

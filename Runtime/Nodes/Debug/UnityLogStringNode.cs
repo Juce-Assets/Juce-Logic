@@ -1,7 +1,7 @@
 ﻿using Juce.Scripting;
 using Juce.Scripting.Instructions;
 
-namespace Juce.Logic.Nodes
+namespace Juce.OldLogic.Nodes
 {
     public class UnityLogStringNode : FlowNode
     {
@@ -10,12 +10,12 @@ namespace Juce.Logic.Nodes
 
         protected override void LinkScriptPorts()
         {
-            LinkInputPortWithLogicPort(nameof(ValueIn), nameof(UnityLogStringInstruction.ValueIn), ValueIn);
+            LinkInputPortWithLogicPort(nameof(ValueIn), nameof(UnityLogInstruction.ValueIn), ValueIn);
         }
 
         protected override ScriptInstruction GenerateInstruction(Script script)
         {
-            return script.CreateScriptInstruction<UnityLogStringInstruction>();
+            return script.CreateScriptInstruction<UnityLogInstruction>();
         }
 
     }

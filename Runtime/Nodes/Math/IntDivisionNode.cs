@@ -1,9 +1,9 @@
 ﻿using Juce.Scripting;
 using Juce.Scripting.Instructions;
 
-namespace Juce.Logic.Nodes
+namespace Juce.OldLogic.Nodes
 {
-    public class IntDivisionNode : InstructionNode
+    public class IntDivisionNode : LogicNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Strict)]
         public int ValueAIn;
