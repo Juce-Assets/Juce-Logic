@@ -1,6 +1,6 @@
 ﻿using XNode;
 
-namespace Juce.OldLogic
+namespace Juce.Logic
 {
     [System.Serializable]
     public class DynamicNodePort 

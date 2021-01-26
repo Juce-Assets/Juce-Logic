@@ -1,6 +1,6 @@
 ﻿using XNodeEditor;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     [CustomNodeEditor(typeof(StartFlowNode))]
     public class StartFlowNodeEditor : NodeEditor

@@ -1,9 +1,9 @@
 {
-    "name": "Juce.Logic.OldRuntime",
+    "name": "Juce.Logic.Editor",
     "references": [
-        "GUID:b8e24fd1eb19b4226afebb2810e3c19b",
-        "GUID:18712b9de5987084d8c8c6ec59bb08a8",
-        "GUID:ac0e4ab8d1956c14297af6dfc36e067d"
+        "GUID:f50e4d708be62c24bbac1539d745031e",
+        "GUID:002c1bbed08fa44d282ef34fd5edb138",
+        "GUID:b8e24fd1eb19b4226afebb2810e3c19b"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

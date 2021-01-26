@@ -1,16 +1,16 @@
 ﻿using Juce.Scripting;
 using Juce.Scripting.Instructions;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     public class UnityLogStringNode : FlowNode
     {
-        [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Strict)]
+        [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.None)]
         public string ValueIn;
 
         protected override void LinkScriptPorts()
         {
-            LinkInputPortWithLogicPort(nameof(ValueIn), nameof(UnityLogInstruction.ValueIn), ValueIn);
+            LinkInputPortWithLogicPort(nameof(ValueIn), UnityLogInstruction.ValueIn, ValueIn);
         }
 
         protected override ScriptInstruction GenerateInstruction(Script script)

@@ -1,9 +1,9 @@
-﻿using Juce.OldLogic.Nodes;
+﻿using Juce.Logic.Nodes;
 using System;
 using XNode;
 using XNodeEditor;
 
-namespace Juce.OldLogic.Graphs
+namespace Juce.Logic.Graphs
 {
     [CustomNodeGraphEditor(typeof(LogicSubGraph))]
     public class LogicSubGraphEditor : NodeGraphEditor

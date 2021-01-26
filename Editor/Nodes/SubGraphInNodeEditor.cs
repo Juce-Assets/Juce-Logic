@@ -1,10 +1,10 @@
-﻿using Juce.OldLogic.Types;
+﻿using Juce.Logic.Types;
 using System;
 using UnityEditor;
 using UnityEngine;
 using XNodeEditor;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     [CustomNodeEditor(typeof(SubGraphInNode))]
     public class SubGraphInNodeEditor : NodeEditor
@@ -59,7 +59,7 @@ namespace Juce.OldLogic.Nodes
                     XNode.NodePort dynamicNodePort = Node.AddDynamicOutput(
                         type, 
                         XNode.Node.ConnectionType.Multiple, 
-                        XNode.Node.TypeConstraint.Strict,
+                        XNode.Node.TypeConstraint.None,
                         newFieldName
                         );
 

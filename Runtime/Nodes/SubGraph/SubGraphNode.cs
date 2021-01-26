@@ -1,11 +1,11 @@
-﻿using Juce.OldLogic.Compiler;
-using Juce.OldLogic.Graphs;
+﻿using Juce.Logic.Compiler;
+using Juce.Logic.Graphs;
 using Juce.Scripting;
 using Juce.Scripting.Instructions.SubScript;
 using UnityEngine;
 using XNode;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     public class SubGraphNode : FlowNode
     {
@@ -26,13 +26,13 @@ namespace Juce.OldLogic.Nodes
                 return;
             }
 
-            Script subscript = new LogicGraphCompiler(logicSubGraph).CompileFlow(subGraphInFlowNode);
+            Script subscript = new LogicGraphCompiler(logicSubGraph, script).CompileFlow(subGraphInFlowNode);
 
             SubScriptInstruction currentInstruction = CompiledScriptInstruction as SubScriptInstruction;
             SubScriptInInstruction subscriptInInstruction = subGraphInFlowNode.CompiledScriptInstruction as SubScriptInInstruction;
             SubScriptOutInstruction subscriptOutInstruction = subGraphOutFlowNode.CompiledScriptInstruction as SubScriptOutInstruction;
 
-            currentInstruction.SubScript = subscript;
+            currentInstruction.SubScriptIndex = subscript.SubScriptIndex;
             currentInstruction.SubscriptInInstructionIndex = subscriptInInstruction.ScriptInstructionIndex;
             currentInstruction.SubscriptOutInstructionIndex = subscriptOutInstruction.ScriptInstructionIndex;
         }

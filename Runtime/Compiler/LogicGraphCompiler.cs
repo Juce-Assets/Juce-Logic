@@ -1,18 +1,25 @@
-﻿using Juce.OldLogic.Graphs;
-using Juce.OldLogic.Nodes;
+﻿using Juce.Logic.Graphs;
+using Juce.Logic.Nodes;
 using Juce.Scripting;
 using System;
 using XNode;
 
-namespace Juce.OldLogic.Compiler
+namespace Juce.Logic.Compiler
 {
     public class LogicGraphCompiler
     {
         private readonly LogicGraph logicGraph;
+        private readonly Script parentScript;
 
         public LogicGraphCompiler(LogicGraph logicGraph)
         {
             this.logicGraph = logicGraph;
+        }
+
+        public LogicGraphCompiler(LogicGraph logicGraph, Script parentScript)
+        {
+            this.logicGraph = logicGraph;
+            this.parentScript = parentScript;
         }
 
         public Script Compile()
@@ -34,7 +41,7 @@ namespace Juce.OldLogic.Compiler
                 return null;
             }
 
-            Script script = CompileAllNodes();
+            Script script = CompileAllNodes(parentScript);
 
             FlowNode currentFlowNode = flowNode;
 
@@ -90,9 +97,18 @@ namespace Juce.OldLogic.Compiler
             return true;
         }
 
-        private Script CompileAllNodes()
+        private Script CompileAllNodes(Script parentScript = null)
         {
-            Script script = new Script();
+            Script script;
+
+            if (parentScript == null)
+            {
+                script = new Script();
+            }
+            else
+            {
+                script = parentScript.AddSubScript();
+            }
 
             foreach (Node node in logicGraph.nodes)
             {

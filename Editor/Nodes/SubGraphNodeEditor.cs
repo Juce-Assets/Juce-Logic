@@ -1,4 +1,4 @@
-﻿using Juce.OldLogic.Graphs;
+﻿using Juce.Logic.Graphs;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -6,7 +6,7 @@ using UnityEngine;
 using XNode;
 using XNodeEditor;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     [CustomNodeEditor(typeof(SubGraphNode))]
     public class SubGraphNodeEditor : NodeEditor
@@ -16,8 +16,6 @@ namespace Juce.OldLogic.Nodes
         private SerializedProperty subGraphSerializedProperty;
 
         private LogicSubGraph logicSubGraph;
-
-        private LogicSubGraph lastLogicSubGraph;
 
         public override void OnBodyGUI()
         {
@@ -29,7 +27,7 @@ namespace Juce.OldLogic.Nodes
 
             DrawRefreshPorts();
 
-            base.OnBodyGUI();
+            DrawPorts();
 
             serializedObject.ApplyModifiedProperties();
         }
@@ -123,7 +121,26 @@ namespace Juce.OldLogic.Nodes
 
             Node.ClearDynamicPorts();
 
-            foreach(NodePort port in inNode.DynamicOutputs)
+            foreach (NodePort port in outNode.DynamicInputs.Reverse())
+            {
+                NodePort newDynamicPort = Node.AddDynamicOutput(
+                    port.ValueType,
+                    port.connectionType,
+                    port.typeConstraint,
+                    port.fieldName
+                    );
+
+                bool oldConnectionFound = oldConnectionsOut.TryGetValue(port.fieldName, out NodePort oldConnection);
+
+                if (!oldConnectionFound)
+                {
+                    continue;
+                }
+
+                newDynamicPort.Connect(oldConnection);
+            }
+
+            foreach (NodePort port in inNode.DynamicOutputs.Reverse())
             {
                 NodePort newDynamicPort = Node.AddDynamicInput(
                     port.ValueType,
@@ -141,24 +158,18 @@ namespace Juce.OldLogic.Nodes
 
                 newDynamicPort.Connect(oldConnection);
             }
+        }
 
-            foreach (NodePort port in outNode.DynamicInputs)
+        private void DrawPorts()
+        {
+            foreach (NodePort port in Node.Inputs)
             {
-                NodePort newDynamicPort = Node.AddDynamicOutput(
-                    port.ValueType,
-                    port.connectionType,
-                    port.typeConstraint,
-                    port.fieldName
-                    );
+                NodeEditorGUILayout.PortField(port);
+            }
 
-                bool oldConnectionFound = oldConnectionsOut.TryGetValue(port.fieldName, out NodePort oldConnection);
-
-                if (!oldConnectionFound)
-                {
-                    continue;
-                }
-
-                newDynamicPort.Connect(oldConnection);
+            foreach (NodePort port in Node.Outputs)
+            {
+                NodeEditorGUILayout.PortField(port);
             }
         }
     }

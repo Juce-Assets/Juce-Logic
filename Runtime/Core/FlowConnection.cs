@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Juce.OldLogic
+namespace Juce.Logic
 {
     [System.Serializable]
     public class FlowConnection

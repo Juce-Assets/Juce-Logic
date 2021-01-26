@@ -1,20 +1,20 @@
 ﻿using Juce.Scripting;
 using Juce.Scripting.Instructions;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     public class IntToStringNode : LogicNode
     {
-        [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Strict)]
+        [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Inherited)]
         public int ValueIn;
 
-        [Output(connectionType = ConnectionType.Multiple, typeConstraint = TypeConstraint.Strict)]
+        [Output(connectionType = ConnectionType.Multiple, typeConstraint = TypeConstraint.Inherited)]
         public string ValueOut;
 
         protected override void LinkScriptPorts()
         {
-            LinkInputPortWithLogicPort(nameof(ValueIn), nameof(IntToStringInstruction.ValueIn), ValueIn);
-            LinkOutputPortWithLogicPort(nameof(ValueOut), nameof(IntToStringInstruction.ValueOut));
+            LinkInputPortWithLogicPort(nameof(ValueIn), IntToStringInstruction.ValueIn, ValueIn);
+            LinkOutputPortWithLogicPort(nameof(ValueOut), IntToStringInstruction.ValueOut);
         }
 
         protected override ScriptInstruction GenerateInstruction(Script script)

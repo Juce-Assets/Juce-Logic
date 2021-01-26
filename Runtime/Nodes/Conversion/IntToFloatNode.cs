@@ -1,20 +1,20 @@
 ﻿using Juce.Scripting;
 using Juce.Scripting.Instructions;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     public class IntToFloatNode : LogicNode
     {
-        [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Strict)]
+        [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Inherited)]
         public int ValueIn;
 
-        [Output(connectionType = ConnectionType.Multiple, typeConstraint = TypeConstraint.Strict)]
+        [Output(connectionType = ConnectionType.Multiple, typeConstraint = TypeConstraint.Inherited)]
         public float ValueOut;
 
         protected override void LinkScriptPorts()
         {
-            LinkInputPortWithLogicPort(nameof(ValueIn), nameof(IntToFloatInstruction.ValueIn), ValueIn);
-            LinkOutputPortWithLogicPort(nameof(ValueOut), nameof(IntToFloatInstruction.ValueOut));
+            LinkInputPortWithLogicPort(nameof(ValueIn), IntToFloatInstruction.ValueIn, ValueIn);
+            LinkOutputPortWithLogicPort(nameof(ValueOut), IntToFloatInstruction.ValueOut);
         }
 
         protected override ScriptInstruction GenerateInstruction(Script script)

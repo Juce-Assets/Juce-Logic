@@ -2,7 +2,7 @@
 using Juce.Scripting.Instructions.SubScript;
 using XNode;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     public class SubGraphOutNode : FlowNode
     {

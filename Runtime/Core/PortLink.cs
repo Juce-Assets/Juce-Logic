@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Juce.OldLogic
+namespace Juce.Logic
 {
     public class PortLink
     {

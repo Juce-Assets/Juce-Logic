@@ -1,7 +1,7 @@
 ﻿using Juce.Scripting;
 using Juce.Scripting.Instructions;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     public class FloatToIntNode : LogicNode
     {
@@ -13,8 +13,8 @@ namespace Juce.OldLogic.Nodes
 
         protected override void LinkScriptPorts()
         {
-            LinkInputPortWithLogicPort(nameof(ValueIn), nameof(FloatToIntInstruction.ValueIn), ValueIn);
-            LinkOutputPortWithLogicPort(nameof(ValueOut), nameof(FloatToIntInstruction.ValueOut));
+            LinkInputPortWithLogicPort(nameof(ValueIn), FloatToIntInstruction.ValueIn, ValueIn);
+            LinkOutputPortWithLogicPort(nameof(ValueOut), FloatToIntInstruction.ValueOut);
         }
 
         protected override ScriptInstruction GenerateInstruction(Script script)

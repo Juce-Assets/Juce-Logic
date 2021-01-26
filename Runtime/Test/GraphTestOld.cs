@@ -1,7 +1,10 @@
-﻿using Juce.OldLogic.Compiler;
-using Juce.OldLogic.Graphs;
+﻿using Juce.Logic.Compiler;
+using Juce.Logic.Graphs;
 using Juce.Scripting;
 using Juce.Scripting.Execution;
+using Newtonsoft.Json;
+using System;
+using System.IO;
 using UnityEngine;
 
 namespace Juce.Logic.Runtime
@@ -16,7 +19,22 @@ namespace Juce.Logic.Runtime
 
             Script script = logicGraphCompiler.Compile();
 
-            ScriptExecutor scriptExecutor = new ScriptExecutor(script);
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
+            };
+
+            string json = JsonConvert.SerializeObject(script, settings);
+
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            File.WriteAllText($"{desktopPath}\\script.json", json);
+
+            Script newScript = JsonConvert.DeserializeObject<Script>(json, settings);
+
+            ScriptExecutor scriptExecutor = new ScriptExecutor(newScript);
 
             scriptExecutor.Execute();
         }

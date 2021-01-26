@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using XNode;
 
-namespace Juce.OldLogic.Graphs
+namespace Juce.Logic.Graphs
 {
     public class LogicGraph : NodeGraph
     {

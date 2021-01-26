@@ -1,7 +1,7 @@
-﻿using Juce.OldLogic.Nodes;
+﻿using Juce.Logic.Nodes;
 using UnityEngine;
 
-namespace Juce.OldLogic.Graphs
+namespace Juce.Logic.Graphs
 {
     [CreateAssetMenu(fileName = "OldLogic", menuName = "OldLogic", order = 100)]
     [RequireNode(typeof(StartFlowNode))]

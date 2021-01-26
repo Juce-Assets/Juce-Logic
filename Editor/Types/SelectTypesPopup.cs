@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace Juce.OldLogic.Types
+namespace Juce.Logic.Types
 {
     public static class SelectTypesPopup
     {

@@ -1,7 +1,7 @@
 ﻿
 using Juce.Scripting;
 
-namespace Juce.OldLogic.Nodes
+namespace Juce.Logic.Nodes
 {
     public class StartFlowNode : FlowNode
     {

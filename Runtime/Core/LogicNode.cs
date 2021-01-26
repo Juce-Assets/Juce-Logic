@@ -1,11 +1,11 @@
-﻿using Juce.OldLogic.Graphs;
+﻿using Juce.Logic.Graphs;
 using Juce.Scripting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using XNode;
 
-namespace Juce.OldLogic
+namespace Juce.Logic
 {
     public abstract class LogicNode : Node
     {
