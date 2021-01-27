@@ -33,12 +33,22 @@ namespace Juce.Logic.Nodes
             NodePort trueConnection = GetOutputPort(nameof(TrueFlowOut)).Connection;
             NodePort falseConnection = GetOutputPort(nameof(FalseFlowOut)).Connection;
 
-            FlowNode trueNode = trueConnection.node as FlowNode;
-            FlowNode falseNode = falseConnection.node as FlowNode;
+            FlowNode trueNode = null;
+            FlowNode falseNode = null;
+
+            if (trueConnection != null)
+            {
+                trueNode = trueConnection.node as FlowNode;
+            }
+
+            if(falseConnection != null)
+            {
+                falseNode = falseConnection.node as FlowNode;
+            }
 
             if (trueNode != null)
             {
-                FlowScriptInstruction trueFlowScriptInstruction = trueNode.CompiledScriptInstruction as FlowScriptInstruction;
+                FlowInstruction trueFlowScriptInstruction = trueNode.CompiledScriptInstruction as FlowInstruction;
 
                 if (trueFlowScriptInstruction != null)
                 {
@@ -50,7 +60,7 @@ namespace Juce.Logic.Nodes
 
             if (falseNode != null)
             {
-                FlowScriptInstruction falseFlowScriptInstruction = falseNode.CompiledScriptInstruction as FlowScriptInstruction;
+                FlowInstruction falseFlowScriptInstruction = falseNode.CompiledScriptInstruction as FlowInstruction;
 
                 if (falseFlowScriptInstruction != null)
                 {

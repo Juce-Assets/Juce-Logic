@@ -9,7 +9,7 @@ namespace Juce.Logic.Nodes
 {
     public class SubGraphNode : FlowNode
     {
-        [SerializeField] [HideInInspector] private LogicSubGraph logicSubGraph;
+        [SerializeField] [HideInInspector] private LogicSubGraph logicSubGraph = default;
 
         public override void OnCompile(Script script)
         {
@@ -26,7 +26,7 @@ namespace Juce.Logic.Nodes
                 return;
             }
 
-            Script subscript = new LogicGraphCompiler(logicSubGraph, script).CompileFlow(subGraphInFlowNode);
+            Script subscript = new LogicGraphCompiler(logicSubGraph).CompileFromSubgraphInNode(script);
 
             SubScriptInstruction currentInstruction = CompiledScriptInstruction as SubScriptInstruction;
             SubScriptInInstruction subscriptInInstruction = subGraphInFlowNode.CompiledScriptInstruction as SubScriptInInstruction;

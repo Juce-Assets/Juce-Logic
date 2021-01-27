@@ -1,7 +1,7 @@
 ﻿using Juce.Logic.Graphs;
 using Juce.Logic.Nodes;
 using Juce.Scripting;
-using System;
+using System.Collections.Generic;
 using XNode;
 
 namespace Juce.Logic.Compiler
@@ -9,20 +9,15 @@ namespace Juce.Logic.Compiler
     public class LogicGraphCompiler
     {
         private readonly LogicGraph logicGraph;
-        private readonly Script parentScript;
+
+        private List<LogicNode> compiledNodes = new List<LogicNode>();
 
         public LogicGraphCompiler(LogicGraph logicGraph)
         {
             this.logicGraph = logicGraph;
         }
 
-        public LogicGraphCompiler(LogicGraph logicGraph, Script parentScript)
-        {
-            this.logicGraph = logicGraph;
-            this.parentScript = parentScript;
-        }
-
-        public Script Compile()
+        public Script CompileFromStartFlowNode()
         {
             if(logicGraph == null)
             {
@@ -31,17 +26,37 @@ namespace Juce.Logic.Compiler
 
             StartFlowNode startFlowNode = logicGraph.GetNode<StartFlowNode>();
 
-            return CompileFlow(startFlowNode);
+            Script script = CompileAllNodes();
+
+            CompileFlow(startFlowNode);
+
+            return script;
         }
 
-        public Script CompileFlow(FlowNode flowNode)
+        public Script CompileFromSubgraphInNode(Script parentScript)
         {
             if (logicGraph == null)
             {
                 return null;
             }
 
+            SubGraphInNode subGraphInNode = logicGraph.GetNode<SubGraphInNode>();
+
             Script script = CompileAllNodes(parentScript);
+
+            CompileFlow(subGraphInNode);
+
+            return script;
+        }
+
+        public void CompileFlow(FlowNode flowNode)
+        {
+            if (logicGraph == null)
+            {
+                return;
+            }
+
+            compiledNodes.Clear();
 
             FlowNode currentFlowNode = flowNode;
 
@@ -61,7 +76,7 @@ namespace Juce.Logic.Compiler
                 LinkFlowNodes(lastFlowNode, currentFlowNode);
             }
 
-            return script;
+            return;
         }
 
         private bool TryGetNextFlowNode(FlowNode flowNode, out FlowNode nextFlowNode)
@@ -139,19 +154,26 @@ namespace Juce.Logic.Compiler
 
         private void LinkFlowNodes(FlowNode flowNode1, FlowNode flowNode2)
         {
-            FlowScriptInstruction flowScriptInstruction1 = flowNode1.CompiledScriptInstruction as FlowScriptInstruction;
-            FlowScriptInstruction flowScriptInstruction2 = flowNode2.CompiledScriptInstruction as FlowScriptInstruction;
+            FlowInstruction flowScriptInstruction1 = flowNode1.CompiledScriptInstruction as FlowInstruction;
+            FlowInstruction flowScriptInstruction2 = flowNode2.CompiledScriptInstruction as FlowInstruction;
 
             flowScriptInstruction1.ConnectFlow(flowScriptInstruction2);
         }
 
         private void LinkInstructionNode(LogicNode instructionNode)
         {
+            if (compiledNodes.Contains(instructionNode))
+            {
+                return;
+            }
+
+            compiledNodes.Add(instructionNode);
+
             foreach (NodePort inputPort in instructionNode.InputScriptLinks)
             {
                 bool found = TryGetInstructionNodeConnection(inputPort, out LogicNode connectedNode);
 
-                if(!found)
+                if (!found)
                 {
                     SetInputPortFallbackValue(instructionNode, inputPort);
 

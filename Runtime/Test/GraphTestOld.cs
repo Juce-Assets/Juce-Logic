@@ -17,7 +17,11 @@ namespace Juce.Logic.Runtime
         {
             LogicGraphCompiler logicGraphCompiler = new LogicGraphCompiler(logicGraph);
 
-            Script script = logicGraphCompiler.Compile();
+            var compileWatch = System.Diagnostics.Stopwatch.StartNew();
+
+            Script script = logicGraphCompiler.CompileFromStartFlowNode();
+
+            compileWatch.Stop();
 
             JsonSerializerSettings settings = new JsonSerializerSettings()
             {
@@ -36,7 +40,14 @@ namespace Juce.Logic.Runtime
 
             ScriptExecutor scriptExecutor = new ScriptExecutor(newScript);
 
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             scriptExecutor.Execute();
+
+            // the code that you want to measure comes here
+            watch.Stop();
+
+            UnityEngine.Debug.Log($"Compile: {compileWatch.ElapsedMilliseconds} | Execute: {watch.ElapsedMilliseconds}");
         }
     }
 }

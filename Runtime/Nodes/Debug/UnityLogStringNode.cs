@@ -17,6 +17,5 @@ namespace Juce.Logic.Nodes
         {
             return script.CreateScriptInstruction<UnityLogInstruction>();
         }
-
     }
 }

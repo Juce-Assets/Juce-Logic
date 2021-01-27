@@ -51,9 +51,9 @@ namespace Juce.Logic
             LinkScriptPorts();
             CompiledScriptInstruction = GenerateInstruction(script);
         }
+
         protected abstract void LinkScriptPorts();
         protected abstract ScriptInstruction GenerateInstruction(Script script);
-
         public virtual void OnCompile(Script script) { }
     }
 }
