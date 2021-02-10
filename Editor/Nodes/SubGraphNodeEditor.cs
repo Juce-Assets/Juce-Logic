@@ -17,6 +17,8 @@ namespace Juce.Logic.Nodes
 
         private LogicSubGraph logicSubGraph;
 
+        private bool needsToHandleSubraphChange;
+
         public override void OnBodyGUI()
         {
             serializedObject.Update();
@@ -27,9 +29,18 @@ namespace Juce.Logic.Nodes
 
             DrawRefreshPorts();
 
+            EditorGUILayout.Space();
+
             DrawPorts();
 
             serializedObject.ApplyModifiedProperties();
+
+            if(needsToHandleSubraphChange)
+            {
+                needsToHandleSubraphChange = false;
+
+                HandleSubGraphChange();
+            }
         }
 
         private void GatherProperties()
@@ -46,13 +57,13 @@ namespace Juce.Logic.Nodes
         {
             LogicSubGraph lastLogicSubGraph = subGraphSerializedProperty.objectReferenceValue as LogicSubGraph;
 
-            NodeEditorGUILayout.PropertyField(subGraphSerializedProperty);
+            NodeEditorGUILayout.PropertyField(subGraphSerializedProperty, new GUIContent("Sub Graph"));
 
             logicSubGraph = subGraphSerializedProperty.objectReferenceValue as LogicSubGraph;
 
             if (lastLogicSubGraph != logicSubGraph)
             {
-                HandleSubGraphChange(lastLogicSubGraph, logicSubGraph);
+                needsToHandleSubraphChange = true;
             }
         }
 
@@ -69,9 +80,9 @@ namespace Juce.Logic.Nodes
             return 300;
         }
 
-        private void HandleSubGraphChange(LogicSubGraph lastLogicSubGrap, LogicSubGraph newLogicSubGraph)
+        private void HandleSubGraphChange()
         {
-            if(newLogicSubGraph == null)
+            if(logicSubGraph == null)
             {
                 ClearPorts();
             }
@@ -126,7 +137,7 @@ namespace Juce.Logic.Nodes
                 NodePort newDynamicPort = Node.AddDynamicOutput(
                     port.ValueType,
                     port.connectionType,
-                    port.typeConstraint,
+                     XNode.Node.TypeConstraint.None,
                     port.fieldName
                     );
 
@@ -145,7 +156,7 @@ namespace Juce.Logic.Nodes
                 NodePort newDynamicPort = Node.AddDynamicInput(
                     port.ValueType,
                     port.connectionType,
-                    port.typeConstraint,
+                    XNode.Node.TypeConstraint.Inherited,
                     port.fieldName
                     );
 
