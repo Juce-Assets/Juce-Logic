@@ -1,8 +1,16 @@
 ﻿using Juce.Scripting;
 using Juce.Scripting.Instructions;
+using Juce.Logic.Attributes;
+using System;
+using Juce.Logic.Graphs;
 
 namespace Juce.Logic.Nodes
 {
+    [LogicNode(
+        "Max",
+        "Math/Int",
+        new Type[] { typeof(BaseLogicGraph) })
+        ]
     public class IntMaxNode : LogicNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Inherited)]

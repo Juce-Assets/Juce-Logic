@@ -1,5 +1,6 @@
 ﻿
 using Juce.Scripting;
+using Juce.Scripting.Instructions;
 
 namespace Juce.Logic.Nodes
 {

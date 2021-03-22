@@ -1,6 +1,4 @@
-﻿using Juce.Logic.Nodes;
-using System;
-using XNode;
+﻿using System;
 using XNodeEditor;
 
 namespace Juce.Logic.Graphs
@@ -12,22 +10,14 @@ namespace Juce.Logic.Graphs
 
         public override string GetNodeMenuName(Type type)
         {
-            if (typeof(StartFlowNode).IsAssignableFrom(type))
+            bool canBeUsed = LogicGraphUtils.LogicNodeCanBeUsedOnGraph(type, Graph.GetType());
+
+            if (!canBeUsed)
             {
                 return null;
             }
 
-            if (typeof(SubGraphInNode).IsAssignableFrom(type))
-            {
-                return null;
-            }
-
-            if (typeof(SubGraphOutNode).IsAssignableFrom(type))
-            {
-                return null;
-            }
-
-            return base.GetNodeMenuName(type);
+            return LogicGraphUtils.GetLogicNodeFullPath(type);
         }
     }
 }

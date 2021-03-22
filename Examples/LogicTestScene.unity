@@ -214,7 +214,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 489036594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ae8fa0fe766f349b853c97780c5431, type: 3}
+  m_Script: {fileID: 11500000, guid: 524a7e07430520746b0ada46673f2db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logicGraph: {fileID: 11400000, guid: a4aed1ef161f2a74db576d9beb5dc848, type: 2}
+  logicMainGraph: {fileID: 11400000, guid: a40a20e1d9517ce459b3432136a86b64, type: 2}
+  inputInt: 10

@@ -1,8 +1,16 @@
-﻿using Juce.Scripting;
+﻿using Juce.Logic.Attributes;
+using Juce.Logic.Graphs;
+using Juce.Scripting;
 using Juce.Scripting.Instructions;
+using System;
 
 namespace Juce.Logic.Nodes
 {
+    [LogicNode(
+        "DoesNothing",
+        "Debug",
+        new Type[] { typeof(BaseLogicGraph) })
+        ]
     public class DoesNothingNode : FlowNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Inherited)]

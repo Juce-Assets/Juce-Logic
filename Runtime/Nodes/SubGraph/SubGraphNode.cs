@@ -1,12 +1,20 @@
-﻿using Juce.Logic.Compiler;
+﻿using Juce.Logic.Attributes;
+using Juce.Logic.Compiler;
 using Juce.Logic.Graphs;
 using Juce.Scripting;
+using Juce.Scripting.Instructions;
 using Juce.Scripting.Instructions.SubScript;
+using System;
 using UnityEngine;
 using XNode;
 
 namespace Juce.Logic.Nodes
 {
+    [LogicNode(
+        "Multiplication",
+        "Math/Int",
+        new Type[] { typeof(LogicMainGraph) })
+        ]
     public class SubGraphNode : FlowNode
     {
         [SerializeField] [HideInInspector] private LogicSubGraph logicSubGraph = default;

@@ -1,8 +1,16 @@
-﻿using Juce.Scripting;
+﻿using Juce.Logic.Attributes;
+using Juce.Logic.Graphs;
+using Juce.Scripting;
 using Juce.Scripting.Instructions;
+using System;
 
 namespace Juce.Logic.Nodes
 {
+    [LogicNode(
+        "Addition",
+        "Math/Int",
+        new Type[] { typeof(BaseLogicGraph) })
+        ]
     public class IntAdditionNode : LogicNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Inherited)]

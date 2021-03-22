@@ -7,10 +7,10 @@ namespace Juce.Logic
         public string Id { get; }
         public object FallbackValue { get; }
 
-        public PortLink(string id, object defaultValue)
+        public PortLink(string id, object fallbackValue)
         {
             Id = id;
-            FallbackValue = defaultValue;
+            FallbackValue = fallbackValue;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Juce.Logic.Graphs;
 using Juce.Logic.Nodes;
 using Juce.Scripting;
+using Juce.Scripting.Instructions;
 using System.Collections.Generic;
 using XNode;
 
@@ -8,11 +9,11 @@ namespace Juce.Logic.Compiler
 {
     public class LogicGraphCompiler
     {
-        private readonly LogicGraph logicGraph;
+        private readonly BaseLogicGraph logicGraph;
 
         private List<LogicNode> compiledNodes = new List<LogicNode>();
 
-        public LogicGraphCompiler(LogicGraph logicGraph)
+        public LogicGraphCompiler(BaseLogicGraph logicGraph)
         {
             this.logicGraph = logicGraph;
         }
@@ -75,8 +76,6 @@ namespace Juce.Logic.Compiler
 
                 LinkFlowNodes(lastFlowNode, currentFlowNode);
             }
-
-            return;
         }
 
         private bool TryGetNextFlowNode(FlowNode flowNode, out FlowNode nextFlowNode)
@@ -134,7 +133,7 @@ namespace Juce.Logic.Compiler
                     continue;
                 }
 
-                instructionNode.Compile(script);
+                instructionNode.OnPreCompile(script);
             }
 
             foreach (Node node in logicGraph.nodes)

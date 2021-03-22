@@ -1,8 +1,16 @@
 ﻿using Juce.Scripting;
 using Juce.Scripting.Instructions;
+using Juce.Logic.Attributes;
+using Juce.Logic.Graphs;
+using System;
 
 namespace Juce.Logic.Nodes
 {
+    [LogicNode(
+        "Substraction",
+        "Math/Int",
+        new Type[] { typeof(BaseLogicGraph) })
+        ]
     public class IntSubstractionNode : LogicNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Inherited)]

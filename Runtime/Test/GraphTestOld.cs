@@ -2,6 +2,7 @@
 using Juce.Logic.Graphs;
 using Juce.Scripting;
 using Juce.Scripting.Execution;
+using Juce.Scripting.Loging;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -11,7 +12,7 @@ namespace Juce.Logic.Runtime
 {
     public class GraphTestOld : MonoBehaviour
     {
-        [SerializeField] private LogicGraph logicGraph = default;
+        [SerializeField] private BaseLogicGraph logicGraph = default;
 
         private void Awake()
         {
@@ -42,7 +43,7 @@ namespace Juce.Logic.Runtime
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            scriptExecutor.Execute();
+            scriptExecutor.Execute(new ScriptLogger());
 
             // the code that you want to measure comes here
             watch.Stop();

@@ -1,8 +1,16 @@
-﻿using Juce.Scripting;
+﻿using Juce.Logic.Graphs;
+using Juce.Scripting;
 using Juce.Scripting.Instructions;
+using Juce.Logic.Attributes;
+using System;
 
 namespace Juce.Logic.Nodes
 {
+    [LogicNode(
+        "Round",
+        "Math/Float",
+        new Type[] { typeof(BaseLogicGraph) })
+        ]
     public class FloatRoundNode : LogicNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Inherited)]

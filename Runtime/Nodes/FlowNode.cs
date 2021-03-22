@@ -1,6 +1,6 @@
 ﻿using XNode;
 
-namespace Juce.Logic
+namespace Juce.Logic.Nodes
 {
     public abstract class FlowNode : LogicNode
     {

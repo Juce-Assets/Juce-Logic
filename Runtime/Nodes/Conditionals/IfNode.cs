@@ -1,10 +1,18 @@
 ﻿using Juce.Logic.Compiler;
+using Juce.Logic.Graphs;
 using Juce.Scripting;
 using Juce.Scripting.Instructions;
+using Juce.Logic.Attributes;
+using System;
 using XNode;
 
 namespace Juce.Logic.Nodes
 {
+    [LogicNode(
+        "If",
+        "Conditionals",
+        new Type[] { typeof(BaseLogicGraph) })
+        ]
     public class IfNode : FlowNode
     {
         [Input(connectionType = ConnectionType.Override, typeConstraint = TypeConstraint.Strict)]

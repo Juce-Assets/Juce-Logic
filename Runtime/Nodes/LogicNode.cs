@@ -1,23 +1,23 @@
 ﻿using Juce.Logic.Graphs;
 using Juce.Scripting;
-using System;
+using Juce.Scripting.Instructions;
 using System.Collections.Generic;
 using System.Linq;
 using XNode;
 
-namespace Juce.Logic
+namespace Juce.Logic.Nodes
 {
     public abstract class LogicNode : Node
     {
         private readonly Dictionary<NodePort, PortLink> inputScriptLinks = new Dictionary<NodePort, PortLink>();
         private readonly Dictionary<NodePort, PortLink> outputScriptLinks = new Dictionary<NodePort, PortLink>();
 
-        public LogicGraph LogicGraph => graph as LogicGraph;
+        public BaseLogicGraph LogicGraph => graph as BaseLogicGraph;
         public ScriptInstruction CompiledScriptInstruction { get; private set; }
 
         public List<NodePort> InputScriptLinks => inputScriptLinks.Keys.ToList();
 
-        public override object GetValue(NodePort port)
+        public sealed override object GetValue(NodePort port)
         {
             return null;
         }
@@ -42,7 +42,7 @@ namespace Juce.Logic
             return outputScriptLinks.TryGetValue(nodePort, out logicPort);
         }
 
-        public void Compile(Script script)
+        public void OnPreCompile(Script script)
         {
             inputScriptLinks.Clear();
             outputScriptLinks.Clear();
