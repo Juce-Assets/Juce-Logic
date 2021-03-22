@@ -50,6 +50,11 @@ namespace Juce.Logic.Graphs
                 return string.Empty;
             }
 
+            if(string.IsNullOrEmpty(logicNodeAttribute.Path))
+            {
+                return logicNodeAttribute.Name;
+            }
+
             return $"{logicNodeAttribute.Path}/{logicNodeAttribute.Name}";
         }
     }

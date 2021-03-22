@@ -11,8 +11,8 @@ using XNode;
 namespace Juce.Logic.Nodes
 {
     [LogicNode(
-        "Multiplication",
-        "Math/Int",
+        "Subgraph",
+        "",
         new Type[] { typeof(LogicMainGraph) })
         ]
     public class SubGraphNode : FlowNode

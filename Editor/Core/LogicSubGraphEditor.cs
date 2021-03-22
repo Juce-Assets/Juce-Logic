@@ -17,7 +17,7 @@ namespace Juce.Logic.Graphs
                 return null;
             }
 
-            return base.GetNodeMenuName(type);
+            return LogicGraphUtils.GetLogicNodeFullPath(type);
         }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Int Input
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -440, y: 120}
+  position: {x: -568, y: 136}
   ports:
     keys:
     - IntOut
@@ -24,7 +24,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: ValueIn
-        node: {fileID: -2041527808533369091}
+        node: {fileID: 8321245719607503424}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: Start Flow
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -456, y: -40}
+  position: {x: -520, y: -56}
   ports:
     keys:
     - FlowIn
@@ -65,66 +65,12 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
       connections:
       - fieldName: FlowIn
-        node: {fileID: -2041527808533369091}
+        node: {fileID: 5751794886586797836}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
       _typeConstraint: 2
       _dynamic: 0
---- !u!114 &-2041527808533369091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd633aaa8bffa084c93d2934de874619, type: 3}
-  m_Name: Unity Log String
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -24, y: 56}
-  ports:
-    keys:
-    - ValueIn
-    - FlowIn
-    - FlowOut
-    values:
-    - _fieldName: ValueIn
-      _node: {fileID: -2041527808533369091}
-      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: IntOut
-        node: {fileID: -7176001100300161395}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: FlowIn
-      _node: {fileID: -2041527808533369091}
-      _typeQualifiedName: Juce.Logic.FlowConnection, Juce.Logic.Runtime, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections:
-      - fieldName: FlowOut
-        node: {fileID: -3651486781016234601}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 1
-      _typeConstraint: 2
-      _dynamic: 0
-    - _fieldName: FlowOut
-      _node: {fileID: -2041527808533369091}
-      _typeQualifiedName: Juce.Logic.FlowConnection, Juce.Logic.Runtime, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 1
-      _typeConstraint: 2
-      _dynamic: 0
-  ValueIn: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,4 +86,104 @@ MonoBehaviour:
   nodes:
   - {fileID: -3651486781016234601}
   - {fileID: -7176001100300161395}
-  - {fileID: -2041527808533369091}
+  - {fileID: 5751794886586797836}
+  - {fileID: 8321245719607503424}
+--- !u!114 &5751794886586797836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5d808102d9b8c42a34ebbc44c83174, type: 3}
+  m_Name: Sub Graph
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -72, y: 24}
+  ports:
+    keys:
+    - FlowIn
+    - FlowOut
+    - dynamicInput_0
+    values:
+    - _fieldName: FlowIn
+      _node: {fileID: 5751794886586797836}
+      _typeQualifiedName: Juce.Logic.FlowConnection, Juce.Logic.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: FlowOut
+        node: {fileID: -3651486781016234601}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 2
+      _dynamic: 0
+    - _fieldName: FlowOut
+      _node: {fileID: 5751794886586797836}
+      _typeQualifiedName: Juce.Logic.FlowConnection, Juce.Logic.Runtime, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 2
+      _dynamic: 0
+    - _fieldName: dynamicInput_0
+      _node: {fileID: 5751794886586797836}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: ValueOut
+        node: {fileID: 8321245719607503424}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 1
+      _dynamic: 1
+  logicSubGraph: {fileID: 11400000, guid: fc3808e3f77260849a20b1caf6c21f1e, type: 2}
+--- !u!114 &8321245719607503424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e596ddb2d54db748b59137feca9c082, type: 3}
+  m_Name: Int To String
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -312, y: 136}
+  ports:
+    keys:
+    - ValueIn
+    - ValueOut
+    values:
+    - _fieldName: ValueIn
+      _node: {fileID: 8321245719607503424}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: IntOut
+        node: {fileID: -7176001100300161395}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 1
+      _dynamic: 0
+    - _fieldName: ValueOut
+      _node: {fileID: 8321245719607503424}
+      _typeQualifiedName: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: dynamicInput_0
+        node: {fileID: 5751794886586797836}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 1
+      _dynamic: 0
+  ValueIn: 0
+  ValueOut: 
