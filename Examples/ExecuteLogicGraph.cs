@@ -12,16 +12,16 @@ public class ExecuteLogicGraph : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Script script = new LogicGraphCompiler(logicMainGraph).CompileFromStartFlowNode();
+        //Script script = new LogicGraphCompiler(logicMainGraph).CompileFromStartFlowNode();
 
-        bool found = script.TryGetScriptInstruction(out IntInputInstruction intInputInstruction);
+        //bool found = script.TryGetScriptInstruction(out IntInputInstruction intInputInstruction);
 
-        if(found)
-        {
-            intInputInstruction.SetInput(inputInt);
-        }
+        //if(found)
+        //{
+        //    intInputInstruction.SetInput(inputInt);
+        //}
 
-        new ScriptExecutor(script).Execute();
+        //new ScriptExecutor(script).Execute();
     }
 
     // Update is called once per frame

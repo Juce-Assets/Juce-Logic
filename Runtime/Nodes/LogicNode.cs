@@ -24,12 +24,26 @@ namespace Juce.Logic.Nodes
 
         protected void LinkInputPortWithLogicPort(string graphPortId, string logicPortId, object fallback)
         {
-            inputScriptLinks.Add(GetInputPort(graphPortId), new PortLink(logicPortId, fallback));
+            NodePort nodePort = GetInputPort(graphPortId);
+
+            if(nodePort == null)
+            {
+                throw new System.Exception($"Input Node port with id {graphPortId} could not be found");
+            }
+
+            inputScriptLinks.Add(nodePort, new PortLink(logicPortId, fallback));
         }
 
         protected void LinkOutputPortWithLogicPort(string graphPortId, string logicPortId)
         {
-            outputScriptLinks.Add(GetOutputPort(graphPortId), new PortLink(logicPortId, default));
+            NodePort nodePort = GetOutputPort(graphPortId);
+
+            if (nodePort == null)
+            {
+                throw new System.Exception($"Output Node port with id {graphPortId} could not be found");
+            }
+
+            outputScriptLinks.Add(nodePort, new PortLink(logicPortId, default));
         }
 
         public bool TryGetInputLogicPort(NodePort nodePort, out PortLink logicPort)

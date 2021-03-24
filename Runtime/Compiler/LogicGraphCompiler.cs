@@ -156,6 +156,18 @@ namespace Juce.Logic.Compiler
             FlowInstruction flowScriptInstruction1 = flowNode1.CompiledScriptInstruction as FlowInstruction;
             FlowInstruction flowScriptInstruction2 = flowNode2.CompiledScriptInstruction as FlowInstruction;
 
+            if(flowScriptInstruction1 == null)
+            {
+                throw new System.Exception($"Flow node {flowNode1.GetType().Name} " +
+                    $"compiled instruction {flowNode1.CompiledScriptInstruction.GetType()} is not a {nameof(FlowInstruction)}");
+            }
+
+            if(flowScriptInstruction2 == null)
+            {
+                throw new System.Exception($"Flow node {flowNode2.GetType().Name} " +
+                    $"compiled instruction {flowNode2.CompiledScriptInstruction.GetType()} is not a {nameof(FlowInstruction)}");
+            }
+
             flowScriptInstruction1.ConnectFlow(flowScriptInstruction2);
         }
 
