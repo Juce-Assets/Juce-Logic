@@ -9,7 +9,7 @@ namespace Juce.Logic.Nodes
     [LogicNode(
         "Log",
         "Debug",
-        new Type[] { typeof(BaseLogicGraph) })
+        new Type[] { typeof(BaseLogicUnityGraph) })
         ]
     public class UnityLogStringNode : FlowNode
     {

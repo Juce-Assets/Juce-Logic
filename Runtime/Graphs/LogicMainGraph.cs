@@ -1,5 +1,4 @@
 ﻿using Juce.Logic.Nodes;
-using UnityEngine;
 
 namespace Juce.Logic.Graphs
 {

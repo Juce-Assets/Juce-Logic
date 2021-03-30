@@ -3,10 +3,10 @@ using XNodeEditor;
 
 namespace Juce.Logic.Graphs
 {
-    [CustomNodeGraphEditor(typeof(LogicMainGraph))]
-    public class LogicMainGraphEditor : NodeGraphEditor
+    [CustomNodeGraphEditor(typeof(BaseLogicGraph))]
+    public class BaseLogicGraphEditor : NodeGraphEditor
     {
-        private LogicMainGraph Graph => target as LogicMainGraph;
+        private BaseLogicGraph Graph => target as BaseLogicGraph;
 
         public override string GetNodeMenuName(Type type)
         {
