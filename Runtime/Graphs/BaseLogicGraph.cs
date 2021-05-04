@@ -7,7 +7,7 @@ namespace Juce.Logic.Graphs
 {
     public class BaseLogicGraph : NodeGraph
     {
-        public List<T> GetNodes<T>() where T : LogicNode
+        public List<T> GetNodes<T>(bool inherited = true) where T : LogicNode
         {
             List<T> ret = new List<T>();
 
@@ -15,9 +15,19 @@ namespace Juce.Logic.Graphs
 
             foreach (Node node in nodes)
             {
-                if (node.GetType() != type)
+                if (!inherited)
                 {
-                    continue;
+                    if (node.GetType() != type)
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    if(!type.IsAssignableFrom(node.GetType()))
+                    {
+                        continue;
+                    }
                 }
 
                 ret.Add((T)node);
